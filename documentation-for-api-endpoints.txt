@@ -1,0 +1,99 @@
+1) Add a Patient
+
+http://localhost:8000/api/patients/add
+
+method: POST
+
+Request Body:
+ {
+  "name": "Rohan Kumar",
+  "age": 35,
+  "triageLevel": 1
+}
+
+Response: 
+{
+  "message": "Patient added successfully",
+  "patient": {
+    "id": 1,
+    "name": "Rohan Kumar",
+    "triageLevel": 1,
+    "arrivalTime": 1742265080685,
+    "status": "waiting"
+  }
+}
+
+
+
+
+2) Get All Patients
+
+http://localhost:8000/api/patients/
+
+method: GET
+
+Response: 
+[
+  {
+    "id": 1,
+    "name": "Rohan Kumar",
+    "triageLevel": 1,
+    "arrivalTime": 1742265080685,
+    "status": "waiting"
+  },
+  {
+    "id": 2,
+    "name": "Suraj",
+    "triageLevel": 5,
+    "arrivalTime": 1742265370565,
+    "status": "waiting"
+  }
+]
+
+
+
+3) Treat a Patient
+
+http://localhost:8000/api/patients/treat/:id
+
+method: PUT
+
+if id=1 then
+Response (if patient exists):
+{
+  "message": "Patient being treated",
+  "patient": {
+    "id": 1,
+    "name": "Rohan Kumar",
+    "triageLevel": 1,
+    "arrivalTime": 1742265080685,
+    "status": "being treated"
+  }
+}
+
+Response (if queue is empty):
+{
+  "error": "Patient not found or not waiting"
+}
+
+
+
+4): Discharge a Patient
+
+method: delete
+
+http://localhost:8000/api/patients/discharge/:id 
+
+if id=1 then
+
+Response:
+{
+  "message": "Patient discharged",
+  "patient": {
+    "id": 1,
+    "name": "Rohan Kumar",
+    "triageLevel": 1,
+    "arrivalTime": 1742265080685,
+    "status": "discharged"
+  }
+}
